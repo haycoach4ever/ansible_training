@@ -6,14 +6,17 @@
 
   - name: update repository index
     dnf:
-      update_cache: true
+      update_cache: yes
+    when: ansible_facts ['distribution'] == "RedHat"
 
-  - name: Install Apache package
+  - name: installing apache package
     dnf:
       name: httpd
       state: latest
+    when: ansible_facts ['distribution'] == "RedHat"
 
   - name: add php support for apache
     dnf:
       name: php
       state: latest
+    when: ansible_facts ['distribution'] == "RedHat"
