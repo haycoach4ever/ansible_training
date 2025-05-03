@@ -4,19 +4,10 @@
   become: true
   tasks:
 
-  - name: update repository index
-    dnf:
+  - name: installing apache and php packages
+    package:
+      name:
+        - "{{ apache_package }}"
+        - "{{ php_package }}"
+      state: latest
       update_cache: yes
-    when: ansible_facts ['distribution'] == "RedHat"
-
-  - name: installing apache package
-    dnf:
-      name: httpd
-      state: latest
-    when: ansible_facts ['distribution'] == "RedHat"
-
-  - name: add php support for apache
-    dnf:
-      name: php
-      state: latest
-    when: ansible_facts ['distribution'] == "RedHat"
