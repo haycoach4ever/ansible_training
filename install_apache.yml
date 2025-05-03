@@ -5,9 +5,9 @@
   tasks:
 
   - name: installing apache and php packages
-    package:
+    dnf:
       name:
-        - "{{ apache_package }}"
-        - "{{ php_package }}"
+        - httpd
+        - php
       state: latest
       update_cache: yes
