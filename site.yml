@@ -5,6 +5,7 @@
   pre_tasks:
 
   - name: install updates (Red Hat)
+    tags: always
     package:
       update_only: yes
       update_cache: yes
@@ -15,26 +16,32 @@
   tasks:
 
   - name: installing apache and php packages
+    tags: apache,redhat,httpd,php
     dnf:
       name:
         - httpd
         - php
       state: latest
+    when: ansible_facts ['distribution'] == "RedHat"
 
 - hosts: db_servers
   become: true
   tasks:
 
     - name: install mariadb package
+      tags: db,mariadb,redhat
       dnf:
         name: mariadb
         state: latest
+      when: ansible_facts ['distribution'] == "RedHat"
 
 - hosts: file_servers
   become: true
   tasks:
 
     - name: install samba package
+      tags: samba
       dnf:
         name: samba
         state: latest
+      when: ansible_facts ['distribution'] == "RedHat"
